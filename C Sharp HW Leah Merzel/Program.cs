@@ -13,6 +13,7 @@ namespace C_Sharp_HW_Leah_Merzel
         static void Main(string[] args)
         {
             RunHomeWork10.RunStore();
+            //hello
             //RunCompositePattern.Run();
             //RunBuildPattern.Run();
             //RunFactoryMethod.RunFactory();
