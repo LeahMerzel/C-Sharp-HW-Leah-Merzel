@@ -11,6 +11,7 @@ namespace C_Sharp_HW_Leah_Merzel.HW11_Exceptions
     {
         public static void ReadFileTest()
         {
+            //try catch
             foreach (string line in System.IO.File.ReadLines(
             #region txtfile
                          @"C:\Users\Owner\Desktop\C# HW Leah Merzel\C Sharp HW Leah Merzel\C Sharp HW Leah Merzel\HW11 Exceptions\test.txt"))

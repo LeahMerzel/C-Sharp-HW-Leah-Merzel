@@ -9,7 +9,6 @@ namespace C_Sharp_HW_Leah_Merzel.HW10_Store
 {
     public class Menu
     {
-
         public static void ShowMenu()
         {
             bool isContinue = true;
