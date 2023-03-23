@@ -29,11 +29,11 @@ namespace Leah_s_HomeWork.HW10_Store
         }
 
         /// <returns>The id of the new Category object</returns>
-        public int AddNewCategory(string categoryName, int categoryParentId)
+        public Category AddNewCategory(string categoryName, int categoryParentId)
         {
             Category category = new Category(categoryName, categoryParentId);
             _categories.Add(category);
-            return category.CategoryId;
+            return category;
         }
 
         public Product AddNewProduct(string name, decimal price, bool isinstock, int categoryId)
@@ -43,7 +43,7 @@ namespace Leah_s_HomeWork.HW10_Store
             return product;
         }
 
-        public void AddNewProducts(Product[] products, int categoryId)
+        public Product[] AddNewProducts(Product[] products, int categoryId)
         {
             Category c = _categories.Find(c => c.CategoryId == categoryId);
             foreach (Product product in products)
@@ -51,6 +51,7 @@ namespace Leah_s_HomeWork.HW10_Store
                     product.CategoryId = categoryId;
                 }
             _products.AddRange(products);
+            return _products.ToArray();
 
         }
 

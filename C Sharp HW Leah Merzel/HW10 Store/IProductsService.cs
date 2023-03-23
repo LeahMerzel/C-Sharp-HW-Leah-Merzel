@@ -8,9 +8,9 @@ namespace Leah_s_HomeWork.HW10_Store
 {
     interface IProductsService
     {
-        int AddNewCategory(string categoryName, int categoryParentId);
+        Category AddNewCategory(string categoryName, int categoryParentId);
         Product AddNewProduct(string name, decimal price, bool isinstock, int categoryId);
-        void AddNewProducts(Product[] products, int categoryId);
+        Product[] AddNewProducts(Product[] products, int categoryId);
         void RemoveProduct(string productId);
         void UpdateProduct(string productId, Product newProductInfo);
         List<Category> GetAllTopLevelCategories();

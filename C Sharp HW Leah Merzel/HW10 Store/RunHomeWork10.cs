@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,61 +13,100 @@ namespace Leah_s_HomeWork.HW10_Store
     {
         public static void RunStore()
         {
-            ProductsService productsService = ProductsService.GetInstance();
-            int boysCategoryId = productsService.AddNewCategory("Boys", 0);
-            int girlsCategoryId = productsService.AddNewCategory("Girls", 0);
-            int babiesCategoryId = productsService.AddNewCategory("Babies", 0);
-            int boysClothingId = productsService.AddNewCategory("Clothing", boysCategoryId);
-            int boysShoesId = productsService.AddNewCategory("Shoes", boysCategoryId);
-            int girlsClothingId = productsService.AddNewCategory("Clothing", girlsCategoryId);
-            int girlsShoesId = productsService.AddNewCategory("Shoes", girlsCategoryId);
-            int babiesClothingId = productsService.AddNewCategory("Clothing", babiesCategoryId);
-            int babiesAccessoriesId = productsService.AddNewCategory("Accessories", babiesCategoryId);
-            Product boysTshirt = productsService.AddNewProduct("T-Shirt", 39, true, boysClothingId);
-            Product boysJeans = productsService.AddNewProduct("Jeans", 60, true, boysClothingId);
-            Product boysSocks = productsService.AddNewProduct("Socks", 7, true, boysClothingId);
-            Product boysSneakers = productsService.AddNewProduct("Sneakers", 35, true, boysShoesId);
-            Product boysBoots =  productsService.AddNewProduct("Boots", 50, true, boysShoesId);
-            Product boysSchoolShoes = productsService.AddNewProduct("SchoolShoes", 89, true, boysShoesId);
-            Product girlsShirt = productsService.AddNewProduct("Shirt", 35, true, girlsClothingId);
-            Product girlsSkirt = productsService.AddNewProduct("Skirt", 55, true, girlsClothingId);
-            Product girlsDress = productsService.AddNewProduct("Dress", 120, true, girlsClothingId);
-            Product girlsSneakers = productsService.AddNewProduct("Sneakers", 35, true, girlsShoesId);
-            Product girlsBoots = productsService.AddNewProduct("Boots", 50, true, girlsShoesId);
-            Product girlsSchoolShoes = productsService.AddNewProduct("SchoolShoes", 89, true, girlsShoesId);
-            Product babiesShirt = productsService.AddNewProduct("Shirt", 35, true, babiesClothingId);
-            Product babiesLeggings = productsService.AddNewProduct("Leggings", 35, true, babiesClothingId);
-            Product babiesOverall = productsService.AddNewProduct("Overall", 60, true, babiesClothingId);
-            Product babyPacifier = productsService.AddNewProduct("Pacifier", 12, true, 9);
-            productsService.RemoveProduct(babyPacifier.ProductId);
-            Product babyBottle = productsService.AddNewProduct("Bottle", 34, true, 9);
-            productsService.RemoveProduct(babyBottle.ProductId);
-            Product babyBlanket = productsService.AddNewProduct("Blanket", 49, true, 9);
-            productsService.RemoveProduct(babyBlanket.ProductId);
-            Product[] babyAccessories = new Product[3] { babyPacifier , babyBottle , babyBlanket };
-            productsService.AddNewProducts(babyAccessories, babiesAccessoriesId);
-            Product boysTshirtColors = new Product { Name = "T-Shirt-Colors", Price = 39, InStock = true, CategoryId = boysClothingId };
-            productsService.UpdateProduct(boysTshirt.ProductId, boysTshirtColors);
-            List<Category> storeCategories = new List<Category>();
-            storeCategories = productsService.GetAllTopLevelCategories();//ok, right? (also next)
-            List<Category> subCategories = new List<Category>();
-            subCategories.ForEach(c => c.ParentCategoryId = babiesCategoryId);
-            subCategories = productsService.GetSubCategories(0);
-            List<Product> productsInCategory = new List<Product>();
-            productsInCategory = productsService.GetProductsCategory(boysClothingId);
-            List<Product> productsPrice = new List<Product>();
-            productsPrice = productsService.GetAllProductsByPrice(25, 85);
-            List<Product> categoryProductsPrice = new List<Product>();
-            categoryProductsPrice = productsService.GetAllProductsByPrice(boysClothingId, 25, 85);
-            List<Product> storeProducts = new List<Product>();
-            storeProducts = productsService.GetAllProducts();
-            Product foundProduct = productsService.FindProductByName("T-Shirt-Colors");
-            int babiesShoesId = productsService.AddNewCategory("Babies Shoes", babiesCategoryId);
-            productsService.SaveAllProductsByCategory(girlsCategoryId);
-            productsService.printToConsole();
-            productsService.RemoveProduct(boysTshirt.ProductId);
-            productsService.RemoveAllProductsOfCategory(babiesClothingId);
-            Menu.ShowMenu();
+            //Product boysTshirtColors = new Product { Name = "T-Shirt-Colors", Price = 39, InStock = true, CategoryId = boysClothingId };
+            //productsService.UpdateProduct(boysTshirt.ProductId, boysTshirtColors);
+            //List<Category> storeCategories = new List<Category>();
+            //storeCategories = productsService.GetAllTopLevelCategories();//ok, right? (also next)
+            //List<Category> subCategories = new List<Category>();
+            //subCategories.ForEach(c => c.ParentCategoryId = babiesCategoryId);
+            //subCategories = productsService.GetSubCategories(0);
+            //List<Product> productsInCategory = new List<Product>();
+            //productsInCategory = productsService.GetProductsCategory(boysClothingId);
+            //List<Product> productsPrice = new List<Product>();
+            //productsPrice = productsService.GetAllProductsByPrice(25, 85);
+            //List<Product> categoryProductsPrice = new List<Product>();
+            //categoryProductsPrice = productsService.GetAllProductsByPrice(boysClothingId, 25, 85);
+            //List<Product> storeProducts = new List<Product>();
+            //storeProducts = productsService.GetAllProducts();
+            //Product foundProduct = productsService.FindProductByName("T-Shirt-Colors");
+            //int babiesShoesId = productsService.AddNewCategory("Babies Shoes", babiesCategoryId);
+            //productsService.SaveAllProductsByCategory(girlsCategoryId);
+            //productsService.printToConsole();
+            //productsService.RemoveProduct(boysTshirt.ProductId);
+            //productsService.RemoveAllProductsOfCategory(babiesClothingId);
+            //Menu.ShowMenu();
+
+            //Create Top Level categories
+            Category boys = new Category("Boys", 0);
+            Category girls = new Category("Girls", 0);
+            Category babies = new Category("Babies", 0);
+
+            //Create Sub categories
+            Category boysClothing = new Category("Boys' Clothing", boys.CategoryId);
+            Category boysShoes = new Category("Boys' Shoes", boys.CategoryId);
+
+            Category girlsClothing = new Category("Girls' Clothing", girls.CategoryId);
+            Category girlsShoes = new Category("Girls' Shoes", girls.CategoryId);
+
+            Category babiesClothing = new Category("Babies' Clothing", babies.CategoryId);
+            Category babiesAccessories = new Category("Babies' Accessories", babies.CategoryId);
+
+            //Create products in Sub Categories
+            Product boysTShirt = new Product("Boys' T-Shirt", 39, true, boysClothing.CategoryId);
+            Product boysJeans = new Product("Boys' Jeans", 70, true, boysClothing.CategoryId);
+            Product boysSweater = new Product("Boys' Sweater", 65, true, boysClothing.CategoryId);
+
+            Product girlsTShirt = new Product("Girls' T-Shirt", 39, true, girlsClothing.CategoryId);
+            Product girlsDress = new Product("Girls' Dress", 80, true, girlsClothing.CategoryId);
+            Product girlsSweater = new Product("Girls' Sweater", 65, true, girlsClothing.CategoryId);
+
+            Product babiesTShirt = new Product("Babies' T-Shirt", 29, true, babiesClothing.CategoryId);
+            Product babiesOverall = new Product("Babies' OverAll", 55, true, babiesClothing.CategoryId);
+            Product babiesSweater = new Product("Babies' Sweater", 50, true, babiesClothing.CategoryId);
+
+            //Create SingleTon IProductService
+            IProductsService productsService = ProductsService.GetInstance();
+
+            //test all productService methods
+            Category toys = productsService.AddNewCategory("Childrens' Toys", 0);
+
+            Product blocks = productsService.AddNewProduct("Blocks", 99, true, toys.CategoryId);
+            Product magnets = productsService.AddNewProduct("Magnets", 120, true, toys.CategoryId);
+            Product duplo = productsService.AddNewProduct("Duplo", 75, true, toys.CategoryId);
+            Product[] ChildrensToys = new Product[3] {blocks, magnets, duplo};
+            productsService.AddNewProducts(ChildrensToys, toys.CategoryId);
+
+            Product foundProduct = productsService.FindProductByName(duplo.ProductId);
+            Console.WriteLine($"The found product id {foundProduct}");
+
+            List<Category> storeCategories = productsService.GetAllTopLevelCategories();
+            storeCategories.ForEach(Console.WriteLine);
+
+            foreach (Category storeCategory in storeCategories)
+            {
+                var storeSubCategories = productsService.GetSubCategories(storeCategory.CategoryId);
+                storeSubCategories.ForEach(Console.WriteLine);
+
+                foreach (Category subCategory in storeSubCategories)
+                {
+                    var categoryProducts = productsService.GetProductsCategory(subCategory.CategoryId);
+                    categoryProducts.ForEach(Console.WriteLine);
+                }
+            }
+
+            List<Product> storeProducts = productsService.GetAllProducts();
+            storeProducts.ForEach(Console.WriteLine);
+
+
+
+            Product mockBlocks = new Product("Blocks",100,true, toys.CategoryId);
+            productsService.RemoveProduct(mockBlocks.ProductId);
+            Product updatedBlocks = new Product("Blocks", 100, true, toys.CategoryId);
+            productsService.UpdateProduct(blocks.ProductId, updatedBlocks);
+
+
+
+
 
 
 
