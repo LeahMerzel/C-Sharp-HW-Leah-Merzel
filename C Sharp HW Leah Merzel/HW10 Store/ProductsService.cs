@@ -35,6 +35,14 @@ namespace Leah_s_HomeWork.HW10_Store
             _categories.Add(category);
             return category;
         }
+        public Category[] AddNewCategories(Category[] categories)
+        {
+            foreach (Category category in categories)
+            {
+                _categories.Add(category);
+            }
+            return _categories.ToArray();
+        }
 
         public Product AddNewProduct(string name, decimal price, bool isinstock, int categoryId)
         {
@@ -42,7 +50,6 @@ namespace Leah_s_HomeWork.HW10_Store
             _products.Add(product);
             return product;
         }
-
         public Product[] AddNewProducts(Product[] products, int categoryId)
         {
             Category c = _categories.Find(c => c.CategoryId == categoryId);
@@ -54,8 +61,14 @@ namespace Leah_s_HomeWork.HW10_Store
             return _products.ToArray();
 
         }
-
-
+        public Product[] AddNewProducts(Product[] products)
+        {
+            foreach (Product product in products)
+            {
+                _products.Add(product);
+            }
+            return _products.ToArray();
+        }
 
         public Product FindProductByName(string productname)
         {
@@ -112,14 +125,7 @@ namespace Leah_s_HomeWork.HW10_Store
 
         public List<Category> GetAllTopLevelCategories()
         {
-            List<Category> categories = new List<Category>();
-            foreach (Category category in _categories)
-            {
-                if (category.ParentCategoryId == 0)
-                {
-                    categories.Add(category);
-                }
-            }
+            List<Category> categories = _categories.FindAll(c=> c.ParentCategoryId==0);
             return categories;
         }
 
@@ -228,19 +234,6 @@ namespace Leah_s_HomeWork.HW10_Store
 
 
         }
-        public void printToConsole()
-        {
-            _categories.ForEach(category =>
-            {
-                Console.WriteLine(category);
-            });
-
-            _products.ForEach(product =>
-            {
-                Console.WriteLine(product);
-            });
-        }
-
 
     }
 }

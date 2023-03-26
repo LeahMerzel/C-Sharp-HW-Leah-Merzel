@@ -65,44 +65,84 @@ namespace Leah_s_HomeWork.HW10_Store
             Product babiesSweater = new Product("Babies' Sweater", 50, true, babiesClothing.CategoryId);
 
             //Create SingleTon IProductService
-            IProductsService productsService = ProductsService.GetInstance();
+            IProductsService ps = ProductsService.GetInstance();
+
+            //Add categories to list of categories
+            Category[] categories = new Category[]{ boys, girls, babies,
+                                      boysClothing, boysShoes,
+                                      girlsClothing, girlsShoes,
+                                      babiesClothing, babiesAccessories };
+            ps.AddNewCategories(categories);
+           
+
+            //Add products to list of products
+            Product[] products = { boysTShirt, boysJeans, boysSweater,
+                                   girlsTShirt, girlsDress, girlsSweater,
+                                   babiesTShirt, babiesOverall, babiesSweater};
+            ps.AddNewProducts(products);
 
             //test all productService methods
-            Category toys = productsService.AddNewCategory("Childrens' Toys", 0);
+            //tets AddNewCategory()
+            Category toys = ps.AddNewCategory("Childrens' Toys", 0);
 
-            Product blocks = productsService.AddNewProduct("Blocks", 99, true, toys.CategoryId);
-            Product magnets = productsService.AddNewProduct("Magnets", 120, true, toys.CategoryId);
-            Product duplo = productsService.AddNewProduct("Duplo", 75, true, toys.CategoryId);
-            Product[] ChildrensToys = new Product[3] {blocks, magnets, duplo};
-            productsService.AddNewProducts(ChildrensToys, toys.CategoryId);
+            //test AddNewProduct()
+            Product blocks = ps.AddNewProduct("Blocks", 99, true, toys.CategoryId);
 
-            Product foundProduct = productsService.FindProductByName(duplo.ProductId);
-            Console.WriteLine($"The found product id {foundProduct}");
+            //test AddNewProducts()
+            Product magnets = ps.AddNewProduct("Magnets", 120, true, toys.CategoryId);
+            Product duplo = ps.AddNewProduct("Duplo", 75, true, toys.CategoryId);
+            Product[] ChildrensToys = new Product[3] { blocks, magnets, duplo };
+            ps.AddNewProducts(ChildrensToys, toys.CategoryId);
 
-            List<Category> storeCategories = productsService.GetAllTopLevelCategories();
-            storeCategories.ForEach(Console.WriteLine);
+            //test FindProductByName()
+            Console.WriteLine("test FindProductByName()");
+            Product foundProduct = ps.FindProductByName("Duplo");
+            Console.WriteLine(foundProduct+"\n");
 
+            //test GetAllTopLevelCategories()
+            Console.WriteLine("test GetAllTopLevelCategories()");
+            var storeCategories = ps.GetAllTopLevelCategories();
+            storeCategories.ForEach(storeCategories => Console.WriteLine(storeCategories + "\n"));
+
+            //test RemoveAllProductsOfCategory()
+            Console.WriteLine("\ntest RemoveAllProductsOfCategory()");
+            ps.RemoveAllProductsOfCategory(babiesClothing.CategoryId);
+
+            //test tets GetSubCategories() and GetProductsCategory()
+            Console.WriteLine("tets GetSubCategories() \n and GetProductsCategory()");
             foreach (Category storeCategory in storeCategories)
             {
-                var storeSubCategories = productsService.GetSubCategories(storeCategory.CategoryId);
-                storeSubCategories.ForEach(Console.WriteLine);
+                var storeSubCategories = ps.GetSubCategories(storeCategory.CategoryId);
+                storeSubCategories.ForEach(storeSubCategories => Console.WriteLine(storeSubCategories + "\n"));
 
                 foreach (Category subCategory in storeSubCategories)
                 {
-                    var categoryProducts = productsService.GetProductsCategory(subCategory.CategoryId);
-                    categoryProducts.ForEach(Console.WriteLine);
+                    var categoryProducts = ps.GetProductsCategory(subCategory.CategoryId);
+                    categoryProducts.ForEach(categoryProducts => Console.WriteLine(categoryProducts));
                 }
             }
 
-            List<Product> storeProducts = productsService.GetAllProducts();
+            //test GetAllProducts()
+            Console.WriteLine("\n test GetAllProducts()");
+            List<Product> storeProducts = ps.GetAllProducts();
             storeProducts.ForEach(Console.WriteLine);
 
+            //test GetAllProductsByPrice()
+            Console.WriteLine("\n test GetAllProductsByPrice()");
+            List<Product> storeProductsInPriceRange = ps.GetAllProductsByPrice(25, 80);
+            storeProductsInPriceRange.ForEach(Console.WriteLine);
+
+            //test GetAllProductsByPrice() in a specific Category
+            Console.WriteLine("\n test GetAllProductsByPrice() in a specific Category");
+            List<Product> CategoryProductsInRange = ps.GetAllProductsByPrice(boysClothing.CategoryId, 25, 80);
+            CategoryProductsInRange.ForEach(Console.WriteLine);
 
 
-            Product mockBlocks = new Product("Blocks",100,true, toys.CategoryId);
-            productsService.RemoveProduct(mockBlocks.ProductId);
+
+            Product mockBlocks = new Product("Blocks", 100, true, toys.CategoryId);
+            ps.RemoveProduct(mockBlocks.ProductId);
             Product updatedBlocks = new Product("Blocks", 100, true, toys.CategoryId);
-            productsService.UpdateProduct(blocks.ProductId, updatedBlocks);
+            ps.UpdateProduct(blocks.ProductId, updatedBlocks);
 
 
 

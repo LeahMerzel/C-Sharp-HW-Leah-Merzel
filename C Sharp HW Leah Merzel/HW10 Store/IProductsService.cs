@@ -11,6 +11,7 @@ namespace Leah_s_HomeWork.HW10_Store
         Category AddNewCategory(string categoryName, int categoryParentId);
         Product AddNewProduct(string name, decimal price, bool isinstock, int categoryId);
         Product[] AddNewProducts(Product[] products, int categoryId);
+        Product[] AddNewProducts(Product[] products);
         void RemoveProduct(string productId);
         void UpdateProduct(string productId, Product newProductInfo);
         List<Category> GetAllTopLevelCategories();
@@ -22,6 +23,7 @@ namespace Leah_s_HomeWork.HW10_Store
         Product FindProductByName(string productname);
         void RemoveAllProductsOfCategory(int categoryId);
         void SaveAllProductsByCategory(int categoryId);
-        void printToConsole();
+        Category[] AddNewCategories(Category[] categories);
+
     }
 }

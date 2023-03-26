@@ -12,11 +12,11 @@ namespace C_Sharp_HW_Leah_Merzel
     {
         static void Main(string[] args)
         {
-            // RunHomeWork10.RunStore();
+            RunHomeWork10.RunStore();
             //RunCompositePattern.Run();
             //RunBuildPattern.Run();
             //RunFactoryMethod.RunFactory();
-            try
+          /*  try
             {
                 ReadFile.ReadFileTest();
             }
@@ -24,7 +24,7 @@ namespace C_Sharp_HW_Leah_Merzel
             {
                 Console.WriteLine(ex);
             }
-
+*/
 
             Console.ReadKey();
         }

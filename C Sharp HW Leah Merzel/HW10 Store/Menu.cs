@@ -63,7 +63,10 @@ namespace C_Sharp_HW_Leah_Merzel.HW10_Store
                             break;
                     }
                     return true;
-                case "3":
+                case "3":                 
+                    List<Product>productsInCategory = productsService.GetProductsCategory(1);
+                    return true;
+                case "4":
                     return false;
                 default:
                     return true;
