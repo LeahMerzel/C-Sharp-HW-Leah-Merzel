@@ -13,29 +13,6 @@ namespace Leah_s_HomeWork.HW10_Store
     {
         public static void RunStore()
         {
-            //Product boysTshirtColors = new Product { Name = "T-Shirt-Colors", Price = 39, InStock = true, CategoryId = boysClothingId };
-            //productsService.UpdateProduct(boysTshirt.ProductId, boysTshirtColors);
-            //List<Category> storeCategories = new List<Category>();
-            //storeCategories = productsService.GetAllTopLevelCategories();//ok, right? (also next)
-            //List<Category> subCategories = new List<Category>();
-            //subCategories.ForEach(c => c.ParentCategoryId = babiesCategoryId);
-            //subCategories = productsService.GetSubCategories(0);
-            //List<Product> productsInCategory = new List<Product>();
-            //productsInCategory = productsService.GetProductsCategory(boysClothingId);
-            //List<Product> productsPrice = new List<Product>();
-            //productsPrice = productsService.GetAllProductsByPrice(25, 85);
-            //List<Product> categoryProductsPrice = new List<Product>();
-            //categoryProductsPrice = productsService.GetAllProductsByPrice(boysClothingId, 25, 85);
-            //List<Product> storeProducts = new List<Product>();
-            //storeProducts = productsService.GetAllProducts();
-            //Product foundProduct = productsService.FindProductByName("T-Shirt-Colors");
-            //int babiesShoesId = productsService.AddNewCategory("Babies Shoes", babiesCategoryId);
-            //productsService.SaveAllProductsByCategory(girlsCategoryId);
-            //productsService.printToConsole();
-            //productsService.RemoveProduct(boysTshirt.ProductId);
-            //productsService.RemoveAllProductsOfCategory(babiesClothingId);
-            //Menu.ShowMenu();
-
             //Create Top Level categories
             Category boys = new Category("Boys", 0);
             Category girls = new Category("Girls", 0);
@@ -137,10 +114,13 @@ namespace Leah_s_HomeWork.HW10_Store
             List<Product> CategoryProductsInRange = ps.GetAllProductsByPrice(boysClothing.CategoryId, 25, 80);
             CategoryProductsInRange.ForEach(Console.WriteLine);
 
-
-
+            //test RemoveProduct()
+            Console.WriteLine("\ntest RemoveProduct()");
             Product mockBlocks = new Product("Blocks", 100, true, toys.CategoryId);
             ps.RemoveProduct(mockBlocks.ProductId);
+
+            //test UpdateProduct()
+            Console.WriteLine("\ntest UpdateProduct()");
             Product updatedBlocks = new Product("Blocks", 100, true, toys.CategoryId);
             ps.UpdateProduct(blocks.ProductId, updatedBlocks);
 
