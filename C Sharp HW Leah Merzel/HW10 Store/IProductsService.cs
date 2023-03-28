@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Leah_s_HomeWork.HW10_Store
 {
-    interface IProductsService
+    public interface IProductsService
     {
         Category AddNewCategory(string categoryName, int categoryParentId);
         Product AddNewProduct(string name, decimal price, bool isinstock, int categoryId);

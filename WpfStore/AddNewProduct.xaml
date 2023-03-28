@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfStore.AddNewProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfStore"
+        mc:Ignorable="d"
+        Title="AddNewProduct" Height="450" Width="800">
+    <Grid>
+        <TextBox Name="NameInput" HorizontalAlignment="Left" Margin="259,217,0,0" TextWrapping="Wrap" Text="Product Name" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="259,183,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="259,147,0,0" TextWrapping="Wrap" Text="In Stock? (true/false)" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Please enter the details of the new product" HorizontalAlignment="Left" Margin="254,116,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add Product" HorizontalAlignment="Left" Margin="259,276,0,0" VerticalAlignment="Top" Click="Add_The_Product_Button_Click"/>
+
+    </Grid>
+</Window>

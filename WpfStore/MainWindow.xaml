@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfStore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfStore"
+        mc:Ignorable="d"
+        Title="StoreWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Canvas>
+        <ComboBox DisplayMemberPath="Name" IsEditable="True" IsReadOnly="True" Text="--Please Choose Categories--" SelectionChanged="comboCategories_SelectionChanged" Name="comboCategories" Canvas.Left="310" Canvas.Top="47" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox DisplayMemberPath="Name" IsEditable="True" IsReadOnly="True" Text="--Please Choose Subcategory--" SelectionChanged="comboSubCategories_SelectionChanged" Name="comboSubCategories" Canvas.Left="310" Canvas.Top="92" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ListBox DisplayMemberPath="Name" Name="ListBoxProducts" Background="WhiteSmoke" BorderThickness="2" BorderBrush="LightGray" Height="226" Width="500" Canvas.Left="176" Canvas.Top="139" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button Content="Delete Product" Canvas.Left="576" Canvas.Top="47" Click="Delete_Button_Click"/>
+    </Canvas>
+</Window>
