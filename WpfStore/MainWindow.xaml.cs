@@ -1,19 +1,7 @@
 ﻿using Leah_s_HomeWork.HW10_Store;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfStore
 {
@@ -42,7 +30,7 @@ namespace WpfStore
             InitView();
         }
 
-       
+
 
         private void InitData()
         {
@@ -62,7 +50,7 @@ namespace WpfStore
             Category babiesAccessories = new Category("Babies' Accessories", babies.CategoryId);
 
             //Add categories to list of categories
-            this.servProducts.AddNewCategories(new Category[]{ boys, girls, babies,
+            servProducts.AddNewCategories(new Category[]{ boys, girls, babies,
                                                                boysClothing, boysShoes,
                                                                girlsClothing, girlsShoes,
                                                                babiesClothing, babiesAccessories });
@@ -81,7 +69,7 @@ namespace WpfStore
             Product babiesSweater = new Product("Babies' Sweater", 50, true, babiesClothing.CategoryId);
 
             //Add products to list of products
-            this.servProducts.AddNewProducts(new Product[]{ boysTShirt, boysJeans, boysSweater,
+            servProducts.AddNewProducts(new Product[]{ boysTShirt, boysJeans, boysSweater,
                                                             girlsTShirt, girlsDress, girlsSweater,
                                                             babiesTShirt, babiesOverall, babiesSweater});
 
@@ -93,70 +81,22 @@ namespace WpfStore
             //Init ComboBox Categories
             comboCategories.Items.Clear();
             var categories = servProducts.GetSubCategories(0);
-            /*for (int i = 0; i < categories.Count; i++)
-            {
-                comboCategories.Items.Add(categories[i].Name);
-            }
-            comboCategories.Items.Insert(0, "--Please Choose Categories--");*/
             comboCategories.Text = "--Please Choose Categories--";
             comboCategories.ItemsSource = categories;
-            //comboCategories.SelectedIndex = 0;
-
         }
-
-                //var subCategories = servProducts.GetSubCategories(categories[i].CategoryId);
-                //for (int j = 0; j<subCategories.Count; j++)
-                //{
-                //    comboSubCategories.Items.Add(subCategories[j].Name);
-                //}
-                //comboSubCategories.Items.Insert(0, "--Please Choose a SubCategory--");
-                //comboSubCategories.SelectedIndex = 0;
-
-
-    private void comboCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void comboCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int idSelected = ((Category)comboCategories.SelectedItem).CategoryId;
             List<Category> subCategories = servProducts.GetSubCategories(idSelected);
-            this.comboSubCategories.ItemsSource = subCategories;
-
-
-
-            //string categorySelected = comboCategories.SelectedItem.ToString();
-            //var categories = servProducts.GetSubCategories(0);
-            //Category found = categories.Find(c => c.Name == categorySelected);
-            //if (found != null)
-            //{
-            //    int idSelected = found.CategoryId;
-            //    List<Category> subCategories = servProducts.GetSubCategories(idSelected);
-            //    this.comboSubCategories.ItemsSource = subCategories;
-            //  //  List<Product> listProducts = servProducts.GetProductsCategory(idSelected);
-            //  //  this.ListBoxProducts.ItemsSource = listProducts;
-            //}
+            comboSubCategories.ItemsSource = subCategories;
 
 
         }
-        //private void InitViewSub()
-        //{
-
-        //    //Init ComboBox Sub-Categories
-        //    comboSubCategories.Items.Clear();
-
-        //    var subCategories = servProducts.GetSubCategories();
-        //    for (int i = 0; i < subCategories.Count; i++)
-        //    {
-        //        comboSubCategories.Items.Add(subCategories[i].Name);
-        //    }
-        //    comboSubCategories.Items.Insert(0, "--Please Choose a SubCategory--");
-        //    comboSubCategories.SelectedIndex = 0;
-        //}
-
-
         private void comboSubCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int idSelected = ((Category)comboSubCategories.SelectedItem).CategoryId;
             List<Product> listProducts = servProducts.GetProductsCategory(idSelected);
             ListBoxProducts.ItemsSource = listProducts;
-            
         }
 
 
@@ -173,10 +113,21 @@ namespace WpfStore
 
         private void Add_Product_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddNewProduct dialog = new AddNewProduct();
-            dialog.ShowDialog();
+            if (comboCategories.SelectedItem != null && comboSubCategories.SelectedItem != null)
+            {
+                int idSelected = ((Category)comboSubCategories.SelectedItem).CategoryId;
 
+                AddNewProduct addNewProduct = new AddNewProduct(idSelected);
+                addNewProduct.ShowDialog();
 
+                ListBoxProducts.ItemsSource = null; 
+                ListBoxProducts.ItemsSource = servProducts.GetProductsCategory(idSelected);
+
+            }
+            else
+            {
+                MessageBox.Show("please choose category and sub-category to add a product");
+            }
         }
     }
 }
